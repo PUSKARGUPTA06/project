@@ -126,6 +126,55 @@ footer{border-top:1px solid var(--border);padding:18px 20px;text-align:center;fo
 
 .hide{display:none!important}
 
+/* ── ADMIN LOGIN MODAL ── */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(8px);z-index:999;display:flex;align-items:center;justify-content:center;animation:fadeIn .25s ease}
+.login-box{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:40px 36px;width:100%;max-width:380px;text-align:center;animation:fadeUp .3s ease;position:relative}
+.login-ico{font-size:36px;margin-bottom:12px;filter:drop-shadow(0 0 12px var(--red-glow))}
+.login-title{font-family:var(--disp);font-size:28px;letter-spacing:2px;margin-bottom:4px}
+.login-sub{font-size:12px;color:var(--dim);margin-bottom:24px;letter-spacing:.5px}
+.login-field{position:relative;margin-bottom:14px}
+.login-field input{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:var(--body);font-size:15px;padding:12px 42px 12px 14px;outline:none;transition:.2s;letter-spacing:1px}
+.login-field input:focus{border-color:var(--red);box-shadow:0 0 0 3px var(--red-glow)}
+.eye-btn{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--dim);cursor:pointer;font-size:16px;padding:2px;line-height:1}
+.eye-btn:hover{color:#fff}
+.login-err{color:var(--red);font-size:12px;min-height:16px;margin-bottom:10px;font-weight:500}
+.login-err:not(:empty)::before{content:"⚠ "}
+.login-btn{width:100%;background:var(--red);border:none;color:#fff;padding:13px;border-radius:8px;font-family:var(--body);font-size:15px;font-weight:600;cursor:pointer;transition:.2s;box-shadow:0 4px 18px var(--red-glow);letter-spacing:.3px}
+.login-btn:hover{background:#b01020;transform:translateY(-1px)}
+.login-hint{font-size:10px;color:var(--dim);margin-top:16px;letter-spacing:.5px}
+/* shake animation on wrong password */
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+.shake{animation:shake .4s ease}
+/* admin badge in header */
+.admin-badge{display:none;align-items:center;gap:8px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:5px 12px;font-size:12px;color:var(--dim)}
+.admin-badge.show{display:flex}
+.admin-badge span{color:var(--green);font-weight:600}
+.logout-btn{background:none;border:1px solid #333;color:#666;padding:3px 10px;border-radius:5px;font-size:11px;cursor:pointer;transition:.2s;font-family:var(--body)}
+.logout-btn:hover{border-color:var(--red);color:var(--red)}
+
+/* ── ADMIN LOGIN MODAL ── */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(6px);z-index:999;display:flex;align-items:center;justify-content:center;padding:20px}
+.login-box{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:40px 36px;width:100%;max-width:380px;animation:fadeUp .35s ease both;position:relative}
+.login-logo{text-align:center;margin-bottom:28px}
+.login-ico{font-size:36px;color:var(--red);filter:drop-shadow(0 0 12px var(--red-glow));display:block;margin-bottom:8px}
+.login-title{font-family:var(--disp);font-size:28px;letter-spacing:2px;color:#fff}
+.login-sub{font-size:11px;color:var(--dim);letter-spacing:1px;text-transform:uppercase;margin-top:2px}
+.login-field{margin-bottom:16px}
+.login-field label{display:block;font-size:10px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--dim);margin-bottom:6px}
+.login-field input{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:#fff;font-family:var(--body);font-size:15px;padding:11px 14px;outline:none;transition:.2s}
+.login-field input:focus{border-color:var(--red);box-shadow:0 0 0 3px var(--red-glow)}
+.login-err{color:var(--red);font-size:12px;font-weight:500;min-height:16px;margin-bottom:12px;text-align:center}
+.login-err:not(:empty)::before{content:"⚠ "}
+.login-btn{width:100%;background:var(--red);border:none;color:#fff;padding:13px;border-radius:8px;font-family:var(--body);font-size:15px;font-weight:600;cursor:pointer;transition:.2s;box-shadow:0 4px 18px var(--red-glow);letter-spacing:.3px}
+.login-btn:hover{background:#b01020;transform:translateY(-1px)}
+.login-hint{text-align:center;margin-top:14px;font-size:11px;color:var(--dim)}
+.login-cancel{background:none;border:none;color:var(--dim);font-size:12px;cursor:pointer;text-decoration:underline;margin-top:8px;display:block;width:100%;text-align:center;font-family:var(--body)}
+.login-cancel:hover{color:#fff}
+/* Logged-in badge in nav */
+.admin-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(229,19,42,.12);border:1px solid rgba(229,19,42,.3);color:var(--red);font-size:11px;padding:4px 10px;border-radius:100px;font-weight:600;letter-spacing:.5px}
+.logout-btn{background:none;border:none;color:var(--dim);font-size:11px;cursor:pointer;padding:0;font-family:var(--body);transition:.2s}
+.logout-btn:hover{color:var(--red)}
+
 @media(max-width:580px){
   .wrap{padding:24px 14px 60px}.card{padding:20px 16px}
   .hdr-in{padding:0 14px}.nbtn{padding:6px 11px;font-size:12px}
@@ -150,14 +199,15 @@ footer{border-top:1px solid var(--border);padding:18px 20px;text-align:center;fo
         <div class="logo-s">Sports Slot Booking System</div>
       </div>
     </div>
-    <nav class="nav">
+    <nav class="nav" id="mainNav">
       <button class="nbtn on" id="navBook">Book Slot</button>
       <button class="nbtn" id="navAdmin">Admin Panel</button>
+      <span class="admin-badge hide" id="adminBadge">🛡 Admin <button class="logout-btn" id="btnLogout" title="Logout">✕ Logout</button></span>
     </nav>
   </div>
 </header>
 
-
+<!-- BOOKING -->
 <section class="sec on" id="sec-booking">
   <div class="wrap">
     <div class="hero">
@@ -184,7 +234,7 @@ footer{border-top:1px solid var(--border);padding:18px 20px;text-align:center;fo
         <div class="step" id="sd3"><div class="step-c">3</div><div class="step-l">Confirm</div></div>
       </div>
 
-      
+      <!-- Step 1 -->
       <div class="fstep" id="fs1">
         <div class="ftitle">Student Details</div>
         <div class="fg">
@@ -202,6 +252,7 @@ footer{border-top:1px solid var(--border);padding:18px 20px;text-align:center;fo
         </div>
       </div>
 
+      <!-- Step 2 -->
       <div class="fstep hide" id="fs2">
         <div class="ftitle">Select Your Slot</div>
         <div class="fg">
@@ -230,6 +281,7 @@ footer{border-top:1px solid var(--border);padding:18px 20px;text-align:center;fo
         </div>
       </div>
 
+      <!-- Step 3 -->
       <div class="fstep hide" id="fs3">
         <div class="ftitle">Review & Confirm</div>
         <div class="rcard" id="reviewBox"></div>
@@ -241,6 +293,7 @@ footer{border-top:1px solid var(--border);padding:18px 20px;text-align:center;fo
       </div>
     </div>
 
+    <!-- Success -->
     <div class="card suc hide" id="sucPanel">
       <div class="suc-ico">✓</div>
       <div class="suc-t">Booking Confirmed!</div>
@@ -251,6 +304,7 @@ footer{border-top:1px solid var(--border);padding:18px 20px;text-align:center;fo
       </div>
     </div>
 
+    <!-- Recent bookings -->
     <div class="card">
       <div class="card-top">
         <div class="card-title">Recent Bookings</div>
@@ -269,6 +323,7 @@ footer{border-top:1px solid var(--border);padding:18px 20px;text-align:center;fo
   </div>
 </section>
 
+<!-- ADMIN -->
 <section class="sec" id="sec-admin">
   <div class="wrap">
     <div class="hero">
@@ -316,15 +371,53 @@ footer{border-top:1px solid var(--border);padding:18px 20px;text-align:center;fo
   <div style="letter-spacing:1px;text-transform:uppercase">Built for Student Athletes</div>
 </footer>
 
+<!-- ADMIN LOGIN MODAL -->
+<div class="overlay hide" id="loginOverlay">
+  <div class="login-box">
+    <div class="login-logo">
+      <span class="login-ico">🔐</span>
+      <div class="login-title">ADMIN LOGIN</div>
+      <div class="login-sub">KR Mangalam Sports · Restricted Access</div>
+    </div>
+    <div class="login-field">
+      <label>Username</label>
+      <input type="text" id="loginUser" placeholder="Enter username" autocomplete="off" spellcheck="false"/>
+    </div>
+    <div class="login-field">
+      <label>Password</label>
+      <input type="password" id="loginPass" placeholder="Enter password"/>
+    </div>
+    <div class="login-err" id="loginErr"></div>
+    <button class="login-btn" id="loginSubmit">Login to Admin Panel →</button>
+    <button class="login-cancel" id="loginCancel">← Go back to Booking</button>
+    <div class="login-hint">Contact sports dept. for admin credentials</div>
+  </div>
+</div>
+
 <script>
-var KEY = "krm_sports_bookings";
-var CAP = {Cricket:22,Football:20,Basketball:10,Pickleball:8,Padelball:8,Volleyball:12};
+// ============================================================
+// CONSTANTS
+// ============================================================
+var KEY      = "krm_sports_bookings";
+var SESS_KEY = "krm_admin_session";   // sessionStorage key for login state
+
+// ⚙️ ADMIN CREDENTIALS — Change these to whatever you want
+var ADMIN_USER = "admin";
+var ADMIN_PASS = "krm@2025";
+
+var CAP   = {Cricket:22,Football:20,Basketball:10,Pickleball:8,Padelball:8,Volleyball:12};
 var SLOTS = ["9:00–10:00 AM","10:00–11:00 AM","11:00–12:00 PM","12:00–1:00 PM","1:00–2:00 PM","2:00–3:00 PM","3:00–4:00 PM"];
 
+// ============================================================
+// STATE
+// ============================================================
 var B = {name:"",roll:"",sport:"",date:"",slot:""};
-var lastB = null;
+var lastB   = null;
 var curStep = 1;
 
+// ============================================================
+// STORAGE
+// ============================================================
 function getAll(){
   try{ return JSON.parse(localStorage.getItem(KEY)||"[]"); }catch(e){ return []; }
 }
@@ -333,6 +426,9 @@ function saveOne(b){
   localStorage.setItem(KEY,JSON.stringify(all));
 }
 
+// ============================================================
+// UTILS
+// ============================================================
 function fmtDate(s){
   if(!s) return "";
   var p=s.split("-"),mo=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
@@ -356,17 +452,121 @@ function rollTaken(roll){
 }
 function isFull(sp,dt,sl){ return countSlot(sp,dt,sl)>=CAP[sp]; }
 
+// ============================================================
+// ADMIN LOGIN SYSTEM
+// ============================================================
+
+// Check if admin is currently logged in (sessionStorage — clears on tab close)
+function isAdminLoggedIn(){
+  return sessionStorage.getItem(SESS_KEY) === "yes";
+}
+
+// Show login modal
+function openLoginModal(){
+  document.getElementById("loginUser").value = "";
+  document.getElementById("loginPass").value = "";
+  document.getElementById("loginErr").textContent  = "";
+  document.getElementById("loginOverlay").classList.remove("hide");
+  setTimeout(function(){ document.getElementById("loginUser").focus(); }, 100);
+}
+
+// Close login modal
+function closeLoginModal(){
+  document.getElementById("loginOverlay").classList.add("hide");
+}
+
+// Attempt login
+function doLogin(){
+  var u = document.getElementById("loginUser").value.trim();
+  var p = document.getElementById("loginPass").value;
+  var errEl = document.getElementById("loginErr");
+  errEl.textContent = "";
+
+  if(!u || !p){
+    errEl.textContent = "Username aur password dono required hain.";
+    shakeBox(); return;
+  }
+  if(u !== ADMIN_USER || p !== ADMIN_PASS){
+    errEl.textContent = "Wrong username or password. Try again.";
+    document.getElementById("loginPass").value = "";
+    shakeBox(); return;
+  }
+
+  // ✅ Correct credentials
+  sessionStorage.setItem(SESS_KEY, "yes");
+  closeLoginModal();
+  updateAdminBadge();
+
+  // Now actually go to admin section
+  goToAdmin();
+}
+
+// Logout
+function doLogout(){
+  if(!confirm("Admin se logout karna chahte ho?")) return;
+  sessionStorage.removeItem(SESS_KEY);
+  updateAdminBadge();
+  // Go back to booking section
+  activateSec("booking");
+}
+
+// Show/hide admin badge in nav
+function updateAdminBadge(){
+  var badge  = document.getElementById("adminBadge");
+  var navAdm = document.getElementById("navAdmin");
+  if(isAdminLoggedIn()){
+    badge.classList.remove("hide");
+    navAdm.textContent = "⚙ Admin Panel";
+  } else {
+    badge.classList.add("hide");
+    navAdm.textContent = "Admin Panel";
+  }
+}
+
+// Shake the login box on wrong password
+function shakeBox(){
+  var box = document.querySelector(".login-box");
+  box.classList.remove("shake");
+  void box.offsetWidth; // reflow
+  box.classList.add("shake");
+}
+
+// ============================================================
+// NAV — with login gate on admin
+// ============================================================
 function showSec(name){
+  if(name === "admin"){
+    if(!isAdminLoggedIn()){
+      openLoginModal();   // show login modal first
+      return;
+    }
+    goToAdmin();
+  } else {
+    activateSec("booking");
+  }
+}
+
+// Actually switch to admin panel (only called after auth)
+function goToAdmin(){
+  activateSec("admin");
+  renderAdmin();
+  renderStats();
+}
+
+// Low-level section switcher
+function activateSec(name){
   document.getElementById("sec-booking").classList.remove("on");
   document.getElementById("sec-admin").classList.remove("on");
   document.getElementById("sec-"+name).classList.add("on");
   document.getElementById("navBook").classList.remove("on");
   document.getElementById("navAdmin").classList.remove("on");
   document.getElementById(name==="admin"?"navAdmin":"navBook").classList.add("on");
-  if(name==="admin"){ renderAdmin(); renderStats(); }
-  else { renderRecent(); }
+  if(name==="booking") renderRecent();
 }
 
+// ============================================================
+// STEPS
+// ============================================================
 function goStep(n){
   if(n>curStep){
     if(curStep===1 && !val1()) return;
@@ -376,6 +576,7 @@ function goStep(n){
   ["fs1","fs2","fs3"].forEach(function(id){ document.getElementById(id).classList.add("hide"); });
   document.getElementById("fs"+n).classList.remove("hide");
   curStep=n;
+  // dots
   for(var i=1;i<=3;i++){
     var d=document.getElementById("sd"+i);
     d.className="step"+(i===n?" on":i<n?" done":"");
@@ -384,6 +585,9 @@ function goStep(n){
   document.getElementById("sl2").className="sline"+(n>2?" done":"");
 }
 
+// ============================================================
+// VALIDATE
+// ============================================================
 function val1(){
   var name=document.getElementById("iName").value.trim();
   var roll=document.getElementById("iRoll").value.trim();
@@ -405,6 +609,9 @@ function val2(){
   B.sport=sp; B.date=dt; return true;
 }
 
+// ============================================================
+// SLOTS
+// ============================================================
 function refreshSlots(){
   var sp=document.getElementById("iSport").value;
   var dt=document.getElementById("iDate").value;
@@ -433,6 +640,9 @@ function refreshSlots(){
   });
 }
 
+// ============================================================
+// REVIEW
+// ============================================================
 function fillReview(){
   var rows=[["Student Name",B.name],["Roll Number",B.roll],["Sport",B.sport],["Date",fmtDate(B.date)],["Time Slot",B.slot],["Capacity",CAP[B.sport]+" players max"]];
   document.getElementById("reviewBox").innerHTML=rows.map(function(r){
@@ -440,6 +650,9 @@ function fillReview(){
   }).join("");
 }
 
+// ============================================================
+// CONFIRM
+// ============================================================
 function confirmBooking(){
   var e=document.getElementById("e3"); e.textContent="";
   if(rollTaken(B.roll)){ e.textContent="Roll number already booked."; return; }
@@ -453,6 +666,9 @@ function confirmBooking(){
   renderRecent();
 }
 
+// ============================================================
+// NEW BOOKING
+// ============================================================
 function newBooking(){
   B={name:"",roll:"",sport:"",date:"",slot:""}; lastB=null;
   document.getElementById("iName").value="";
@@ -467,6 +683,9 @@ function newBooking(){
   window.scrollTo({top:0,behavior:"smooth"});
 }
 
+// ============================================================
+// RECEIPT
+// ============================================================
 function downloadReceipt(){
   if(!lastB){ alert("No booking to download."); return; }
   var b=lastB;
@@ -477,6 +696,9 @@ function downloadReceipt(){
   document.body.appendChild(a); a.click(); document.body.removeChild(a);
 }
 
+// ============================================================
+// EXPORT CSV
+// ============================================================
 function exportCSV(){
   var all=getAll();
   if(!all.length){ alert("No bookings to export."); return; }
@@ -489,6 +711,9 @@ function exportCSV(){
   document.body.appendChild(a); a.click(); document.body.removeChild(a);
 }
 
+// ============================================================
+// RENDER RECENT
+// ============================================================
 function renderRecent(){
   var all=getAll().slice(-10).reverse();
   var tb=document.getElementById("recentBody");
@@ -498,6 +723,9 @@ function renderRecent(){
   }).join("");
 }
 
+// ============================================================
+// RENDER ADMIN TABLE
+// ============================================================
 function renderAdmin(){
   var all=getAll();
   var fs=document.getElementById("fSport").value;
@@ -512,6 +740,9 @@ function renderAdmin(){
   }).join("");
 }
 
+// ============================================================
+// RENDER STATS
+// ============================================================
 function renderStats(){
   var all=getAll(), cnt={};
   Object.keys(CAP).forEach(function(s){ cnt[s]=0; });
@@ -521,6 +752,9 @@ function renderStats(){
   document.getElementById("statsRow").innerHTML=h;
 }
 
+// ============================================================
+// CLEAR ALL
+// ============================================================
 function clearAll(){
   if(!confirm("Are you sure? ALL bookings will be permanently deleted!")) return;
   localStorage.removeItem(KEY);
@@ -528,27 +762,53 @@ function clearAll(){
   alert("All bookings cleared.");
 }
 
+// ============================================================
+// WIRE ALL BUTTONS (no inline onclick — pure addEventListener)
+// ============================================================
 document.addEventListener("DOMContentLoaded", function(){
 
+  // Date minimum
   document.getElementById("iDate").min = todayStr();
 
+  // Admin login modal buttons
+  document.getElementById("loginSubmit").addEventListener("click", doLogin);
+  document.getElementById("loginCancel").addEventListener("click", function(){
+    closeLoginModal();
+    // stay on booking section
+    activateSec("booking");
+  });
+  document.getElementById("btnLogout").addEventListener("click", doLogout);
+
+  // Allow Enter key inside login modal
+  document.getElementById("loginUser").addEventListener("keydown", function(e){ if(e.key==="Enter") document.getElementById("loginPass").focus(); });
+  document.getElementById("loginPass").addEventListener("keydown", function(e){ if(e.key==="Enter") doLogin(); });
+
+  // Init admin badge state (in case session was active on reload)
+  updateAdminBadge();
+
+  // Nav
   document.getElementById("navBook").addEventListener("click",  function(){ showSec("booking"); });
   document.getElementById("navAdmin").addEventListener("click", function(){ showSec("admin"); });
 
+  // Step navigation
   document.getElementById("btn1to2").addEventListener("click", function(){ goStep(2); });
   document.getElementById("btn2back").addEventListener("click", function(){ goStep(1); });
   document.getElementById("btn2to3").addEventListener("click", function(){ goStep(3); });
   document.getElementById("btn3back").addEventListener("click", function(){ goStep(2); });
   document.getElementById("btnConfirm").addEventListener("click", confirmBooking);
 
+  // Success panel
   document.getElementById("btnReceipt").addEventListener("click", downloadReceipt);
   document.getElementById("btnNew").addEventListener("click", newBooking);
 
+  // Booking refresh
   document.getElementById("btnRefreshRecent").addEventListener("click", renderRecent);
 
+  // Slot triggers
   document.getElementById("iSport").addEventListener("change", refreshSlots);
   document.getElementById("iDate").addEventListener("change",  refreshSlots);
 
+  // Admin buttons
   document.getElementById("btnRefreshAdmin").addEventListener("click", renderAdmin);
   document.getElementById("btnCSV").addEventListener("click",   exportCSV);
   document.getElementById("btnClear").addEventListener("click", clearAll);
@@ -560,6 +820,7 @@ document.addEventListener("DOMContentLoaded", function(){
   document.getElementById("fSport").addEventListener("change", renderAdmin);
   document.getElementById("fDate").addEventListener("change",  renderAdmin);
 
+  // Initial render
   renderRecent();
 });
 </script>
