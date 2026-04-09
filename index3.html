@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>KR Mangalam Sports Slot Booking</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#0a0a0a;--surface:#111;--surface2:#1a1a1a;--border:#242424;
+  --text:#f0f0f0;--dim:#666;--red:#e5132a;--red-glow:rgba(229,19,42,0.3);
+  --green:#22c55e;--radius:10px;
+  --disp:'Bebas Neue',sans-serif;--body:'DM Sans',sans-serif;--mono:'JetBrains Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:15px;line-height:1.6;min-height:100vh;overflow-x:hidden}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:#333;border-radius:3px}
+
+.hdr{position:sticky;top:0;z-index:100;background:rgba(10,10,10,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.hdr-in{max-width:960px;margin:0 auto;padding:0 20px;height:62px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-ico{font-size:26px;color:var(--red);filter:drop-shadow(0 0 8px var(--red-glow))}
+.logo-t{font-family:var(--disp);font-size:18px;letter-spacing:2px;line-height:1}
+.logo-s{font-size:10px;color:var(--dim);letter-spacing:1px;text-transform:uppercase}
+.nav{display:flex;gap:6px}
+.nbtn{background:transparent;border:1px solid var(--border);color:var(--dim);padding:7px 16px;border-radius:6px;font-family:var(--body);font-size:13px;font-weight:500;cursor:pointer;transition:.2s}
+.nbtn:hover{border-color:var(--red);color:#fff}
+.nbtn.on{background:var(--red);border-color:var(--red);color:#fff;box-shadow:0 0 16px var(--red-glow)}
+
+.sec{display:none}.sec.on{display:block}
+
+.wrap{max-width:800px;margin:0 auto;padding:44px 20px 80px;display:flex;flex-direction:column;gap:26px}
+
+.hero{text-align:center;padding:10px 0}
+.hero-tag{display:inline-block;background:var(--surface2);border:1px solid var(--border);color:var(--dim);font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:4px 14px;border-radius:100px;margin-bottom:14px}
+.hero-h{font-family:var(--disp);font-size:clamp(46px,8vw,78px);line-height:.95;letter-spacing:2px;margin-bottom:12px}
+.hero-h span{color:var(--red);text-shadow:0 0 40px var(--red-glow)}
+.hero-p{color:var(--dim);font-size:14px;max-width:400px;margin:0 auto}
+
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.chip{background:var(--surface);border:1px solid var(--border);color:var(--dim);padding:7px 16px;border-radius:100px;font-size:12px;font-weight:500;display:flex;align-items:center;gap:7px;transition:.2s;cursor:default}
+.chip:hover{border-color:var(--red);color:#fff;box-shadow:0 0 10px var(--red-glow)}
+.chip .cap{background:var(--red);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:100px}
+
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:30px;animation:fadeUp .4s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:8px}
+.card-title{font-family:var(--disp);font-size:20px;letter-spacing:1px}
+
+.steps{display:flex;align-items:center;justify-content:center;margin-bottom:32px}
+.step{display:flex;flex-direction:column;align-items:center;gap:5px}
+.step-c{width:34px;height:34px;border-radius:50%;border:2px solid var(--border);color:var(--dim);font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;transition:.3s;font-family:var(--mono)}
+.step.on .step-c{border-color:var(--red);background:var(--red);color:#fff;box-shadow:0 0 14px var(--red-glow)}
+.step.done .step-c{border-color:var(--green);background:var(--green);color:#fff}
+.step-l{font-size:10px;color:var(--dim);letter-spacing:1px;text-transform:uppercase}
+.step.on .step-l{color:var(--red)}.step.done .step-l{color:var(--green)}
+.sline{flex:1;height:2px;background:var(--border);margin:0 6px 16px;max-width:70px;transition:.3s}
+.sline.done{background:var(--green)}
+
+.fstep{animation:fadeIn .3s ease both}
+.fstep.hide{display:none}
+@keyframes fadeIn{from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:translateX(0)}}
+.ftitle{font-family:var(--disp);font-size:26px;letter-spacing:1px;margin-bottom:22px}
+
+.fg{margin-bottom:18px}
+.flabel{display:block;font-size:11px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--dim);margin-bottom:7px}
+.finput{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:var(--body);font-size:15px;padding:11px 14px;outline:none;transition:.2s;-webkit-appearance:none}
+.finput:focus{border-color:var(--red);box-shadow:0 0 0 3px var(--red-glow)}
+.finput option{background:var(--surface2)}
+.fhint{display:block;font-size:11px;color:var(--dim);margin-top:4px}
+input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(.5);cursor:pointer}
+.finput.sm{width:auto;max-width:180px}
+
+.sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:9px;margin-top:5px}
+.slotbtn{background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--dim);padding:11px 8px;font-family:var(--mono);font-size:11px;cursor:pointer;transition:.2s;text-align:center;width:100%}
+.slotbtn:hover:not([disabled]):not(.sel){border-color:var(--red);color:#fff}
+.slotbtn.sel{background:var(--red);border-color:var(--red);color:#fff;box-shadow:0 0 12px var(--red-glow)}
+.slotbtn[disabled]{opacity:.3;cursor:not-allowed;text-decoration:line-through}
+.sc{display:block;font-size:9px;margin-top:3px;opacity:.7;font-family:var(--body)}
+
+.rcard{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:22px;margin-bottom:22px}
+.rrow{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--border);gap:10px}
+.rrow:last-child{border-bottom:none}
+.rk{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--dim);font-weight:600;min-width:90px}
+.rv{font-size:14px;color:#fff;font-weight:500;text-align:right}
+
+.brow{display:flex;gap:10px;flex-wrap:wrap}
+.brow.ctr{justify-content:center}
+.btn{background:var(--red);border:none;color:#fff;padding:12px 26px;border-radius:8px;font-family:var(--body);font-size:14px;font-weight:600;cursor:pointer;transition:.2s;box-shadow:0 4px 18px var(--red-glow)}
+.btn:hover{background:#b01020;transform:translateY(-1px)}
+.btn2{background:transparent;border:1px solid var(--border);color:var(--dim);padding:12px 20px;border-radius:8px;font-family:var(--body);font-size:14px;cursor:pointer;transition:.2s}
+.btn2:hover{border-color:#aaa;color:#fff}
+.sbtn{background:var(--surface2);border:1px solid var(--border);color:var(--dim);padding:6px 13px;border-radius:6px;font-family:var(--body);font-size:12px;cursor:pointer;transition:.2s;white-space:nowrap}
+.sbtn:hover{border-color:#aaa;color:#fff}
+.sbtn.red{border-color:var(--red);color:var(--red)}
+.sbtn.red:hover{background:var(--red);color:#fff}
+.sbtn.del:hover{border-color:var(--red);color:var(--red)}
+
+.err{color:var(--red);font-size:13px;font-weight:500;min-height:18px;margin-bottom:10px}
+.err:not(:empty)::before{content:"⚠ "}
+
+.suc{text-align:center;padding:44px 28px;border-color:var(--green)!important;box-shadow:0 0 40px rgba(34,197,94,.1)}
+.suc-ico{width:60px;height:60px;border-radius:50%;background:var(--green);color:#fff;font-size:26px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;box-shadow:0 0 28px rgba(34,197,94,.4);animation:pop .4s cubic-bezier(.34,1.56,.64,1) both}
+@keyframes pop{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
+.suc-t{font-family:var(--disp);font-size:34px;letter-spacing:2px;margin-bottom:8px}
+.suc-m{color:var(--dim);font-size:14px;margin-bottom:24px;line-height:1.7}
+
+.twrap{overflow-x:auto;border-radius:8px;border:1px solid var(--border)}
+.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl th{background:var(--surface2);color:var(--dim);font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:11px 14px;text-align:left;border-bottom:1px solid var(--border);white-space:nowrap}
+.tbl td{padding:11px 14px;border-bottom:1px solid var(--border);color:var(--text)}
+.tbl tbody tr:last-child td{border-bottom:none}
+.tbl tbody tr:hover td{background:var(--surface2)}
+.empty{text-align:center;color:var(--dim);padding:30px!important;font-style:italic}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px}
+.scard{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;text-align:center;transition:.2s}
+.scard:hover{border-color:var(--red)}
+.sv{font-family:var(--disp);font-size:34px;color:var(--red);line-height:1;text-shadow:0 0 18px var(--red-glow)}
+.sl{font-size:10px;color:var(--dim);letter-spacing:1px;text-transform:uppercase;margin-top:4px}
+
+.frow{display:flex;align-items:center;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+
+footer{border-top:1px solid var(--border);padding:18px 20px;text-align:center;font-size:11px;color:var(--dim);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;max-width:960px;margin:0 auto}
+
+.hide{display:none!important}
+
+@media(max-width:580px){
+  .wrap{padding:24px 14px 60px}.card{padding:20px 16px}
+  .hdr-in{padding:0 14px}.nbtn{padding:6px 11px;font-size:12px}
+  .hero-h{font-size:42px}.sgrid{grid-template-columns:repeat(2,1fr)}
+  .brow{flex-direction:column}.btn,.btn2{width:100%;text-align:center}
+  .sline{max-width:36px}.stats{grid-template-columns:repeat(3,1fr)}
+  footer{flex-direction:column}
+  .rrow{flex-direction:column;align-items:flex-start}.rv{text-align:left}
+  .finput.sm{width:100%;max-width:unset}
+}
+@media(max-width:380px){.stats{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="hdr-in">
+    <div class="logo">
+      <div class="logo-ico">⬡</div>
+      <div>
+        <div class="logo-t">KR MANGALAM</div>
+        <div class="logo-s">Sports Slot Booking System</div>
+      </div>
+    </div>
+    <nav class="nav">
+      <button class="nbtn on" id="navBook">Book Slot</button>
+      <button class="nbtn" id="navAdmin">Admin Panel</button>
+    </nav>
+  </div>
+</header>
+
+
+<section class="sec on" id="sec-booking">
+  <div class="wrap">
+    <div class="hero">
+      <div class="hero-tag">University Sports — Official Portal</div>
+      <h1 class="hero-h">Reserve Your<br/><span>Game Time</span></h1>
+      <p class="hero-p">Book sports slots across 6 facilities. Fast, simple, real-time.</p>
+    </div>
+
+    <div class="chips">
+      <div class="chip">🏏 Cricket <span class="cap">22</span></div>
+      <div class="chip">⚽ Football <span class="cap">20</span></div>
+      <div class="chip">🏀 Basketball <span class="cap">10</span></div>
+      <div class="chip">🏓 Pickleball <span class="cap">8</span></div>
+      <div class="chip">🎾 Padelball <span class="cap">8</span></div>
+      <div class="chip">🏐 Volleyball <span class="cap">12</span></div>
+    </div>
+
+    <div class="card" id="formCard">
+      <div class="steps">
+        <div class="step on" id="sd1"><div class="step-c">1</div><div class="step-l">Student</div></div>
+        <div class="sline" id="sl1"></div>
+        <div class="step" id="sd2"><div class="step-c">2</div><div class="step-l">Slot</div></div>
+        <div class="sline" id="sl2"></div>
+        <div class="step" id="sd3"><div class="step-c">3</div><div class="step-l">Confirm</div></div>
+      </div>
+
+      
+      <div class="fstep" id="fs1">
+        <div class="ftitle">Student Details</div>
+        <div class="fg">
+          <label class="flabel">Full Name</label>
+          <input type="text" id="iName" class="finput" placeholder="e.g. Arjun Sharma" autocomplete="off"/>
+        </div>
+        <div class="fg">
+          <label class="flabel">Roll Number</label>
+          <input type="text" id="iRoll" class="finput" placeholder="e.g. KRM2024001" autocomplete="off"/>
+          <span class="fhint">One active booking per roll number</span>
+        </div>
+        <div class="err" id="e1"></div>
+        <div class="brow">
+          <button class="btn" id="btn1to2">Next Step →</button>
+        </div>
+      </div>
+
+      <div class="fstep hide" id="fs2">
+        <div class="ftitle">Select Your Slot</div>
+        <div class="fg">
+          <label class="flabel">Sport</label>
+          <select id="iSport" class="finput">
+            <option value="">-- Choose a sport --</option>
+            <option>Cricket</option><option>Football</option>
+            <option>Basketball</option><option>Pickleball</option>
+            <option>Padelball</option><option>Volleyball</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label class="flabel">Date</label>
+          <input type="date" id="iDate" class="finput"/>
+        </div>
+        <div class="fg">
+          <label class="flabel">Time Slot</label>
+          <div class="sgrid" id="slotGrid">
+            <p style="color:var(--dim);font-size:13px;grid-column:1/-1">Select sport and date first.</p>
+          </div>
+        </div>
+        <div class="err" id="e2"></div>
+        <div class="brow">
+          <button class="btn2" id="btn2back">← Back</button>
+          <button class="btn" id="btn2to3">Review →</button>
+        </div>
+      </div>
+
+      <div class="fstep hide" id="fs3">
+        <div class="ftitle">Review & Confirm</div>
+        <div class="rcard" id="reviewBox"></div>
+        <div class="err" id="e3"></div>
+        <div class="brow">
+          <button class="btn2" id="btn3back">← Edit</button>
+          <button class="btn" id="btnConfirm">✓ Confirm Booking</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card suc hide" id="sucPanel">
+      <div class="suc-ico">✓</div>
+      <div class="suc-t">Booking Confirmed!</div>
+      <div class="suc-m" id="sucMsg"></div>
+      <div class="brow ctr">
+        <button class="btn" id="btnReceipt">⬇ Download Receipt</button>
+        <button class="btn2" id="btnNew">+ New Booking</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-title">Recent Bookings</div>
+        <button class="sbtn" id="btnRefreshRecent">↻ Refresh</button>
+      </div>
+      <div class="twrap">
+        <table class="tbl">
+          <thead><tr>
+            <th>Name</th><th>Roll No.</th><th>Sport</th>
+            <th>Date</th><th>Time</th><th>Booking ID</th>
+          </tr></thead>
+          <tbody id="recentBody"><tr><td colspan="6" class="empty">No bookings yet.</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="sec-admin">
+  <div class="wrap">
+    <div class="hero">
+      <div class="hero-tag">Admin Access</div>
+      <h1 class="hero-h">All <span>Bookings</span></h1>
+      <p class="hero-p">View, filter, export or clear all booking records.</p>
+    </div>
+
+    <div class="stats" id="statsRow"></div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-title">Booking Records</div>
+        <div class="brow" style="gap:6px">
+          <button class="sbtn" id="btnRefreshAdmin">↻ Refresh</button>
+          <button class="sbtn red" id="btnCSV">⬇ Export CSV</button>
+          <button class="sbtn del" id="btnClear">🗑 Clear All</button>
+        </div>
+      </div>
+      <div class="frow">
+        <select class="finput sm" id="fSport">
+          <option value="">All Sports</option>
+          <option>Cricket</option><option>Football</option>
+          <option>Basketball</option><option>Pickleball</option>
+          <option>Padelball</option><option>Volleyball</option>
+        </select>
+        <input type="date" class="finput sm" id="fDate"/>
+        <button class="sbtn" id="btnClearFilter">✕ Clear Filters</button>
+      </div>
+      <div class="twrap">
+        <table class="tbl">
+          <thead><tr>
+            <th>#</th><th>Booking ID</th><th>Name</th><th>Roll No.</th>
+            <th>Sport</th><th>Date</th><th>Time</th><th>Booked At</th>
+          </tr></thead>
+          <tbody id="adminBody"><tr><td colspan="8" class="empty">No bookings found.</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>KR Mangalam University · Sports Slot Booking System · 2025</div>
+  <div style="letter-spacing:1px;text-transform:uppercase">Built for Student Athletes</div>
+</footer>
+
+<script>
+var KEY = "krm_sports_bookings";
+var CAP = {Cricket:22,Football:20,Basketball:10,Pickleball:8,Padelball:8,Volleyball:12};
+var SLOTS = ["9:00–10:00 AM","10:00–11:00 AM","11:00–12:00 PM","12:00–1:00 PM","1:00–2:00 PM","2:00–3:00 PM","3:00–4:00 PM"];
+
+var B = {name:"",roll:"",sport:"",date:"",slot:""};
+var lastB = null;
+var curStep = 1;
+
+function getAll(){
+  try{ return JSON.parse(localStorage.getItem(KEY)||"[]"); }catch(e){ return []; }
+}
+function saveOne(b){
+  var all=getAll(); all.push(b);
+  localStorage.setItem(KEY,JSON.stringify(all));
+}
+
+function fmtDate(s){
+  if(!s) return "";
+  var p=s.split("-"),mo=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  return parseInt(p[2])+" "+mo[parseInt(p[1])-1]+" "+p[0];
+}
+function todayStr(){
+  var n=new Date();
+  return n.getFullYear()+"-"+String(n.getMonth()+1).padStart(2,"0")+"-"+String(n.getDate()).padStart(2,"0");
+}
+function makeId(){
+  var c="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",id="KRM-";
+  for(var i=0;i<6;i++) id+=c[Math.floor(Math.random()*36)];
+  return id;
+}
+function countSlot(sp,dt,sl){
+  return getAll().filter(function(b){ return b.sport===sp&&b.date===dt&&b.slot===sl; }).length;
+}
+function rollTaken(roll){
+  var r=roll.toLowerCase();
+  return getAll().some(function(b){ return b.roll.toLowerCase()===r; });
+}
+function isFull(sp,dt,sl){ return countSlot(sp,dt,sl)>=CAP[sp]; }
+
+function showSec(name){
+  document.getElementById("sec-booking").classList.remove("on");
+  document.getElementById("sec-admin").classList.remove("on");
+  document.getElementById("sec-"+name).classList.add("on");
+  document.getElementById("navBook").classList.remove("on");
+  document.getElementById("navAdmin").classList.remove("on");
+  document.getElementById(name==="admin"?"navAdmin":"navBook").classList.add("on");
+  if(name==="admin"){ renderAdmin(); renderStats(); }
+  else { renderRecent(); }
+}
+
+function goStep(n){
+  if(n>curStep){
+    if(curStep===1 && !val1()) return;
+    if(curStep===2 && !val2()) return;
+  }
+  if(n===3) fillReview();
+  ["fs1","fs2","fs3"].forEach(function(id){ document.getElementById(id).classList.add("hide"); });
+  document.getElementById("fs"+n).classList.remove("hide");
+  curStep=n;
+  for(var i=1;i<=3;i++){
+    var d=document.getElementById("sd"+i);
+    d.className="step"+(i===n?" on":i<n?" done":"");
+  }
+  document.getElementById("sl1").className="sline"+(n>1?" done":"");
+  document.getElementById("sl2").className="sline"+(n>2?" done":"");
+}
+
+function val1(){
+  var name=document.getElementById("iName").value.trim();
+  var roll=document.getElementById("iRoll").value.trim();
+  var e=document.getElementById("e1"); e.textContent="";
+  if(!name||name.length<2){ e.textContent="Please enter your full name."; return false; }
+  if(!roll||roll.length<2){ e.textContent="Please enter your roll number."; return false; }
+  if(rollTaken(roll)){ e.textContent='Roll "'+roll+'" already has an active booking.'; return false; }
+  B.name=name; B.roll=roll; return true;
+}
+function val2(){
+  var sp=document.getElementById("iSport").value;
+  var dt=document.getElementById("iDate").value;
+  var e=document.getElementById("e2"); e.textContent="";
+  if(!sp){ e.textContent="Please select a sport."; return false; }
+  if(!dt){ e.textContent="Please select a date."; return false; }
+  if(dt<todayStr()){ e.textContent="Cannot book a past date."; return false; }
+  if(!B.slot){ e.textContent="Please select a time slot."; return false; }
+  if(isFull(sp,dt,B.slot)){ e.textContent="Slot is full! Choose another."; return false; }
+  B.sport=sp; B.date=dt; return true;
+}
+
+function refreshSlots(){
+  var sp=document.getElementById("iSport").value;
+  var dt=document.getElementById("iDate").value;
+  var g=document.getElementById("slotGrid");
+  B.slot="";
+  if(!sp||!dt){
+    g.innerHTML='<p style="color:var(--dim);font-size:13px;grid-column:1/-1">Select sport and date first.</p>';
+    return;
+  }
+  g.innerHTML="";
+  SLOTS.forEach(function(sl){
+    var taken=countSlot(sp,dt,sl), left=CAP[sp]-taken, full=left<=0;
+    var btn=document.createElement("button");
+    btn.className="slotbtn"; btn.type="button";
+    btn.innerHTML=sl+'<span class="sc">'+(full?"FULL":left+" left")+"</span>";
+    if(full){ btn.disabled=true; }
+    else{
+      btn.addEventListener("click",function(){
+        document.querySelectorAll(".slotbtn").forEach(function(x){ x.classList.remove("sel"); });
+        btn.classList.add("sel");
+        B.slot=sl;
+        document.getElementById("e2").textContent="";
+      });
+    }
+    g.appendChild(btn);
+  });
+}
+
+function fillReview(){
+  var rows=[["Student Name",B.name],["Roll Number",B.roll],["Sport",B.sport],["Date",fmtDate(B.date)],["Time Slot",B.slot],["Capacity",CAP[B.sport]+" players max"]];
+  document.getElementById("reviewBox").innerHTML=rows.map(function(r){
+    return '<div class="rrow"><span class="rk">'+r[0]+'</span><span class="rv">'+r[1]+'</span></div>';
+  }).join("");
+}
+
+function confirmBooking(){
+  var e=document.getElementById("e3"); e.textContent="";
+  if(rollTaken(B.roll)){ e.textContent="Roll number already booked."; return; }
+  if(isFull(B.sport,B.date,B.slot)){ e.textContent="Slot just filled up! Go back and pick another."; return; }
+  var b={id:makeId(),name:B.name,roll:B.roll,sport:B.sport,date:B.date,slot:B.slot,bookedAt:new Date().toISOString()};
+  saveOne(b); lastB=b;
+  document.getElementById("formCard").classList.add("hide");
+  document.getElementById("sucMsg").innerHTML='Booking ID: <strong style="color:var(--red);font-family:monospace">'+b.id+'</strong><br/>'+b.name+' · '+b.roll+'<br/>'+b.sport+' · '+fmtDate(b.date)+' · '+b.slot;
+  var p=document.getElementById("sucPanel"); p.classList.remove("hide");
+  p.scrollIntoView({behavior:"smooth",block:"start"});
+  renderRecent();
+}
+
+function newBooking(){
+  B={name:"",roll:"",sport:"",date:"",slot:""}; lastB=null;
+  document.getElementById("iName").value="";
+  document.getElementById("iRoll").value="";
+  document.getElementById("iSport").value="";
+  document.getElementById("iDate").value="";
+  document.getElementById("slotGrid").innerHTML='<p style="color:var(--dim);font-size:13px;grid-column:1/-1">Select sport and date first.</p>';
+  ["e1","e2","e3"].forEach(function(id){ document.getElementById(id).textContent=""; });
+  document.getElementById("formCard").classList.remove("hide");
+  document.getElementById("sucPanel").classList.add("hide");
+  goStep(1);
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function downloadReceipt(){
+  if(!lastB){ alert("No booking to download."); return; }
+  var b=lastB;
+  var txt=["================================================","   KR MANGALAM UNIVERSITY","   Sports Slot Booking Receipt","================================================","","  Booking ID   : "+b.id,"  Student Name : "+b.name,"  Roll Number  : "+b.roll,"  Sport        : "+b.sport,"  Date         : "+fmtDate(b.date),"  Time Slot    : "+b.slot,"  Booked At    : "+new Date(b.bookedAt).toLocaleString(),"","================================================","  Present this receipt at the sports facility.","  Booking is non-transferable.","================================================","","  KR Mangalam University · Sports Department"].join("\n");
+  var a=document.createElement("a");
+  a.href=URL.createObjectURL(new Blob([txt],{type:"text/plain"}));
+  a.download="KRM_Receipt_"+b.id+".txt";
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+}
+
+function exportCSV(){
+  var all=getAll();
+  if(!all.length){ alert("No bookings to export."); return; }
+  var esc=function(v){ return '"'+String(v||"").replace(/"/g,'""')+'"'; };
+  var rows=[["Booking ID","Name","Roll No","Sport","Date","Time Slot","Booked At"].map(esc).join(",")];
+  all.forEach(function(b){ rows.push([b.id,b.name,b.roll,b.sport,fmtDate(b.date),b.slot,new Date(b.bookedAt).toLocaleString()].map(esc).join(",")); });
+  var a=document.createElement("a");
+  a.href=URL.createObjectURL(new Blob([rows.join("\n")],{type:"text/csv;charset=utf-8;"}));
+  a.download="KRM_Bookings_"+todayStr()+".csv";
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+}
+
+function renderRecent(){
+  var all=getAll().slice(-10).reverse();
+  var tb=document.getElementById("recentBody");
+  if(!all.length){ tb.innerHTML='<tr><td colspan="6" class="empty">No bookings yet.</td></tr>'; return; }
+  tb.innerHTML=all.map(function(b){
+    return '<tr><td>'+b.name+'</td><td style="font-family:monospace;font-size:12px">'+b.roll+'</td><td>'+b.sport+'</td><td>'+fmtDate(b.date)+'</td><td style="font-family:monospace;font-size:11px">'+b.slot+'</td><td style="font-family:monospace;font-size:11px;color:var(--red)">'+b.id+'</td></tr>';
+  }).join("");
+}
+
+function renderAdmin(){
+  var all=getAll();
+  var fs=document.getElementById("fSport").value;
+  var fd=document.getElementById("fDate").value;
+  if(fs) all=all.filter(function(b){ return b.sport===fs; });
+  if(fd) all=all.filter(function(b){ return b.date===fd; });
+  all=all.slice().reverse();
+  var tb=document.getElementById("adminBody");
+  if(!all.length){ tb.innerHTML='<tr><td colspan="8" class="empty">No bookings found.</td></tr>'; return; }
+  tb.innerHTML=all.map(function(b,i){
+    return '<tr><td style="color:var(--dim)">'+(i+1)+'</td><td style="font-family:monospace;font-size:11px;color:var(--red)">'+b.id+'</td><td>'+b.name+'</td><td style="font-family:monospace;font-size:12px">'+b.roll+'</td><td>'+b.sport+'</td><td>'+fmtDate(b.date)+'</td><td style="font-family:monospace;font-size:11px">'+b.slot+'</td><td style="font-size:11px;color:var(--dim)">'+new Date(b.bookedAt).toLocaleString()+'</td></tr>';
+  }).join("");
+}
+
+function renderStats(){
+  var all=getAll(), cnt={};
+  Object.keys(CAP).forEach(function(s){ cnt[s]=0; });
+  all.forEach(function(b){ if(cnt[b.sport]!==undefined) cnt[b.sport]++; });
+  var h='<div class="scard"><div class="sv">'+all.length+'</div><div class="sl">Total</div></div>';
+  Object.keys(CAP).forEach(function(s){ h+='<div class="scard"><div class="sv">'+cnt[s]+'</div><div class="sl">'+s+'</div></div>'; });
+  document.getElementById("statsRow").innerHTML=h;
+}
+
+function clearAll(){
+  if(!confirm("Are you sure? ALL bookings will be permanently deleted!")) return;
+  localStorage.removeItem(KEY);
+  renderAdmin(); renderStats(); renderRecent();
+  alert("All bookings cleared.");
+}
+
+document.addEventListener("DOMContentLoaded", function(){
+
+  document.getElementById("iDate").min = todayStr();
+
+  document.getElementById("navBook").addEventListener("click",  function(){ showSec("booking"); });
+  document.getElementById("navAdmin").addEventListener("click", function(){ showSec("admin"); });
+
+  document.getElementById("btn1to2").addEventListener("click", function(){ goStep(2); });
+  document.getElementById("btn2back").addEventListener("click", function(){ goStep(1); });
+  document.getElementById("btn2to3").addEventListener("click", function(){ goStep(3); });
+  document.getElementById("btn3back").addEventListener("click", function(){ goStep(2); });
+  document.getElementById("btnConfirm").addEventListener("click", confirmBooking);
+
+  document.getElementById("btnReceipt").addEventListener("click", downloadReceipt);
+  document.getElementById("btnNew").addEventListener("click", newBooking);
+
+  document.getElementById("btnRefreshRecent").addEventListener("click", renderRecent);
+
+  document.getElementById("iSport").addEventListener("change", refreshSlots);
+  document.getElementById("iDate").addEventListener("change",  refreshSlots);
+
+  document.getElementById("btnRefreshAdmin").addEventListener("click", renderAdmin);
+  document.getElementById("btnCSV").addEventListener("click",   exportCSV);
+  document.getElementById("btnClear").addEventListener("click", clearAll);
+  document.getElementById("btnClearFilter").addEventListener("click", function(){
+    document.getElementById("fSport").value="";
+    document.getElementById("fDate").value="";
+    renderAdmin();
+  });
+  document.getElementById("fSport").addEventListener("change", renderAdmin);
+  document.getElementById("fDate").addEventListener("change",  renderAdmin);
+
+  renderRecent();
+});
+</script>
+</body>
+</html>
